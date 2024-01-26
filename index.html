@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="icon.png" />
+    <style>
+      body {
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      #button {
+        width: 130px;
+        height: 130px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <video src="AI.mp4" id="button" loop></video>
+    <script>
+      button = document.getElementById("button");
+
+      button.addEventListener("click", function () {
+        SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = new SpeechRecognition();
+
+        recognition.onstart = () => {
+          document.getElementById("button").play();
+        };
+
+        recognition.onspeechend = () => {
+          document.getElementById("button").pause();
+          recognition.stop();
+        };
+
+        recognition.onresult = (result) => {
+          console.log(result.results[0][0].transcript.toUpperCase());
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN YOUTUBE"
+          ) {
+            window.open("https://www.youtube.com/", "_blank");
+          }
+          if (result.results[0][0].transcript.toUpperCase() === "OPEN GOOGLE") {
+            window.open("https://www.google.com/", "_blank");
+          }
+          if (result.results[0][0].transcript.toUpperCase() === "OPEN TWITCH") {
+            window.open("https://www.twitch.tv/", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() ===
+            "OPEN MY PORTFOLIO"
+          ) {
+            window.open("https://abhinavpanwar.netlify.app/", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN WHATSAPP"
+          ) {
+            window.open("https://web.whatsapp.com/", "_blank");
+          }
+          if (result.results[0][0].transcript.toUpperCase() === "OPEN GITHUB") {
+            window.open("https://github.com/ABHINAVpanwar", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN JIO CINEMA"
+          ) {
+            window.open("https://www.jiocinema.com/", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN TATA PLAY"
+          ) {
+            window.open("https://watch.tataplay.com/", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN ACADEMY"
+          ) {
+            window.open(
+              "https://academia.srmist.edu.in/#Page:My_Electives_18_Regulation",
+              "_blank"
+            );
+          }
+          if (result.results[0][0].transcript.toUpperCase() === "OPEN KICK") {
+            window.open("https://kick.com/", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN INSTAGRAM"
+          ) {
+            window.open(
+              "https://www.instagram.com/abhinavpanwar199/",
+              "_blank"
+            );
+          }
+          if (result.results[0][0].transcript.toUpperCase() === "PLAY SONG") {
+            window.open("https://www.youtube.com/playlist?list=WL", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() === "OPEN CRICBUZZ"
+          ) {
+            window.open("https://www.cricbuzz.com/", "_blank");
+          }
+          if (
+            result.results[0][0].transcript.toUpperCase() ===
+            "MECHANICAL PANDEY"
+          ) {
+            window.open(
+              "https://www.youtube.com/@MechanicalPandeyOfficial/streams",
+              "_blank"
+            );
+          }
+          if (result.results[0][0].transcript.toUpperCase() === "BEAST") {
+            window.open(
+              "https://www.youtube.com/@BeastStats/streams",
+              "_blank"
+            );
+          }
+        };
+
+        recognition.start();
+      });
+    </script>
+  </body>
+</html>
