@@ -12,25 +12,33 @@
     />
     <link rel="icon" type="image/x-icon" href="icon.png" />
     <style>
-      body {
-        background-color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       #button {
-        width: 130px;
-        height: 130px;
         cursor: pointer;
       }
     </style>
   </head>
-  <body>
-    <video src="AI.mp4" id="button" loop></video>
+  <body id="button">
+    <video id="background" muted>
+      <source src="BGD.mp4" type="video/mp4" />
+    </video>
     <script>
       button = document.getElementById("button");
+      bgd = document.getElementById("background");
 
       button.addEventListener("click", function () {
         SpeechRecognition =
@@ -38,12 +46,12 @@
         let recognition = new SpeechRecognition();
 
         recognition.onstart = () => {
-          document.getElementById("button").play();
+          bgd.play();
         };
 
         recognition.onspeechend = () => {
-          document.getElementById("button").pause();
           recognition.stop();
+          bgd.pause();
         };
 
         recognition.onresult = (result) => {
