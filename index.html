@@ -33,7 +33,7 @@
     </style>
   </head>
   <body id="button">
-    <video id="background" muted>
+    <video id="background">
       <source src="BGD.mp4" type="video/mp4" />
     </video>
     <script>
@@ -55,6 +55,7 @@
         };
 
         recognition.onresult = (result) => {
+          bgd.pause();
           console.log(result.results[0][0].transcript.toUpperCase());
           if (
             result.results[0][0].transcript.toUpperCase() === "OPEN YOUTUBE"
