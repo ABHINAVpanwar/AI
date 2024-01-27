@@ -57,14 +57,6 @@
         recognition.onresult = (result) => {
           bgd.pause();
           console.log(result.results[0][0].transcript.toUpperCase());
-          if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN YOUTUBE"
-          ) {
-            window.open("https://www.youtube.com/", "_blank");
-          }
-          if (result.results[0][0].transcript.toUpperCase() === "OPEN GOOGLE") {
-            window.open("https://www.google.com/", "_blank");
-          }
           if (result.results[0][0].transcript.toUpperCase() === "OPEN TWITCH") {
             window.open("https://www.twitch.tv/", "_blank");
           }
@@ -120,17 +112,62 @@
             window.open("https://www.cricbuzz.com/", "_blank");
           }
           if (
-            result.results[0][0].transcript.toUpperCase() ===
-            "MECHANICAL PANDEY"
+            result.results[0][0].transcript.toLowerCase().includes("weather")
           ) {
             window.open(
-              "https://www.youtube.com/@MechanicalPandeyOfficial/streams",
+              "https://www.google.com/search?q=today+weather&sca_esv=d2fe1144a6b7689a&rlz=1C1CHBF_enIN997IN997&sxsrf=ACQVn08H6X2OxWhxf1HrM0N_fMxuU8hHBw%3A1706341856374&ei=4LW0ZbSkFu-SseMPztSyQA&oq=today&gs_lp=Egxnd3Mtd2l6LXNlcnAiBXRvZGF5KgIIATIKEAAYgAQYFBiHAjITEAAYgAQYFBiHAhixAxiDARjJAzILEAAYgAQYigUYkgMyChAAGIAEGIoFGEMyChAAGIAEGIoFGEMyEBAAGIAEGIoFGEMYsQMYgwEyChAAGIAEGIoFGEMyDRAAGIAEGIoFGEMYsQMyDRAAGIAEGIoFGEMYsQMyCBAAGIAEGLEDSMy_AVCwnQFYiqUBcAZ4AZABAJgBpAigAcIYqgEHNS0yLjEuMbgBA8gBAPgBAagCFMICChAAGEcY1gQYsAPCAg0QABiABBiKBRhDGLADwgIHECMY6gIYJ8ICDRAuGMcBGNEDGOoCGCfCAhMQABiABBiKBRhDGOoCGLQC2AEBwgIUEAAYgAQY4wQY6QQY6gIYtALYAQHCAhYQABgDGI8BGOUCGOoCGLQCGIwD2AECwgIEECMYJ8ICChAjGIAEGIoFGCfCAhAQLhiABBiKBRhDGLEDGIMBwgIKEC4YgAQYigUYQ8ICExAAGIAEGIoFGEMYsQMYgwEYyQPiAwQYACBBiAYBkAYJugYGCAEQARgBugYGCAIQARgL&sclient=gws-wiz-serp",
               "_blank"
             );
           }
-          if (result.results[0][0].transcript.toUpperCase() === "BEAST") {
+          if (result.results[0][0].transcript.toLowerCase().includes("time")) {
+            const currentTime = new Date().toLocaleTimeString();
+            alert(`CURRENT TIME IS ${currentTime}`);
+          }
+          if (result.results[0][0].transcript.toLowerCase().includes("date")) {
+            const currentDate = new Date().toLocaleDateString();
+            alert(`TODAY'S DATE IS ${currentDate}`);
+          }
+          if (
+            result.results[0][0].transcript
+              .toLowerCase()
+              .includes("search wikipedia for")
+          ) {
+            const wiki = result.results[0][0].transcript
+              .toLowerCase()
+              .replace("search wikipedia for", "")
+              .trim();
             window.open(
-              "https://www.youtube.com/@BeastStats/streams",
+              `https://en.wikipedia.org/wiki/${encodeURIComponent(wiki)}`,
+              "_blank"
+            );
+          }
+          if (
+            result.results[0][0].transcript
+              .toLowerCase()
+              .includes("search youtube for")
+          ) {
+            const you = result.results[0][0].transcript
+              .toLowerCase()
+              .replace("search youtube for", "")
+              .trim();
+            window.open(
+              `https://www.youtube.com/results?search_query=${encodeURIComponent(
+                you
+              )}`,
+              "_blank"
+            );
+          }
+          if (
+            result.results[0][0].transcript
+              .toLowerCase()
+              .includes("search google for")
+          ) {
+            const google = result.results[0][0].transcript
+              .toLowerCase()
+              .replace("search google for", "")
+              .trim();
+            window.open(
+              `https://www.google.com/search?q=${encodeURIComponent(google)}`,
               "_blank"
             );
           }
