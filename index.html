@@ -64,35 +64,39 @@
         recognition.onresult = (result) => {
           bgd.pause();
           console.log(result.results[0][0].transcript.toUpperCase());
-          if (result.results[0][0].transcript.toUpperCase() === "OPEN TWITCH") {
+          if (result.results[0][0].transcript.toLowerCase().includes("hello")) {
+            alert("HELLO THERE! HOW CAN I HELP YOU ?");
+          } else if (
+            result.results[0][0].transcript.toLowerCase() === "open twitch"
+          ) {
             window.open("https://www.twitch.tv/", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() ===
+            result.results[0][0].transcript.toLowerCase() ===
             "OPEN MY PORTFOLIO"
           ) {
             window.open("https://abhinavpanwar.netlify.app/", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN WHATSAPP"
+            result.results[0][0].transcript.toLowerCase() === "open whatsapp"
           ) {
             window.open("https://web.whatsapp.com/", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN GITHUB"
+            result.results[0][0].transcript.toLowerCase() === "open github"
           ) {
             window.open("https://github.com/ABHINAVpanwar", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN JIO CINEMA"
+            result.results[0][0].transcript.toLowerCase() === "open jio cinema"
           ) {
             window.open("https://www.jiocinema.com/", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN KICK"
+            result.results[0][0].transcript.toLowerCase() === "open kick"
           ) {
             window.open("https://kick.com/", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN INSTAGRAM"
+            result.results[0][0].transcript.toLowerCase() === "open instagram"
           ) {
             window.open("https://www.instagram.com/", "_blank");
           } else if (
-            result.results[0][0].transcript.toUpperCase() === "OPEN CRICBUZZ"
+            result.results[0][0].transcript.toLowerCase() === "open cricbuzz"
           ) {
             window.open("https://www.cricbuzz.com/", "_blank");
           } else if (
