@@ -54,6 +54,13 @@
           bgd.pause();
         };
 
+        // Function for voice feedback
+        function speak(message) {
+          const synth = window.speechSynthesis;
+          const utterance = new SpeechSynthesisUtterance(message);
+          synth.speak(utterance);
+        }
+
         recognition.onresult = (result) => {
           bgd.pause();
           console.log(result.results[0][0].transcript.toUpperCase());
