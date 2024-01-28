@@ -163,6 +163,110 @@
           } else if (
             result.results[0][0].transcript
               .toLowerCase()
+              .includes("directions from")
+          ) {
+            const apiKey =
+              "5b3ce3597851110001cf6248228510d0766f420584e4a4dccc1cd89f"; // Replace with your actual OpenRouteService API key
+
+            const locationCommand = result.results[0][0].transcript
+              .toLowerCase()
+              .replace("directions from", "")
+              .trim();
+
+            // Split the command into starting and destination parts
+            const [startLocation, destination] = locationCommand.split(" to ");
+
+            // Use OpenRouteService Geocoding API to get coordinates for the starting location
+            const startGeocodingUrl = `https://api.openrouteservice.org/geocode/search?api_key=${apiKey}&text=${encodeURIComponent(
+              startLocation
+            )}`;
+
+            fetch(startGeocodingUrl)
+              .then((response) => response.json())
+              .then((startData) => {
+                // Extract coordinates from the first feature in the geocoding response
+                const startCoords = startData.features[0].geometry.coordinates;
+                // Use OpenRouteService Geocoding API to get coordinates for the destination
+                const destinationGeocodingUrl = `https://api.openrouteservice.org/geocode/search?api_key=${apiKey}&text=${encodeURIComponent(
+                  destination
+                )}`;
+
+                fetch(destinationGeocodingUrl)
+                  .then((response) => response.json())
+                  .then((destinationData) => {
+                    // Extract coordinates from the first feature in the geocoding response
+                    const destinationCoords =
+                      destinationData.features[0].geometry.coordinates;
+
+                    // Use the obtained startCoords and destinationCoords in the directions URL
+                    const directionsUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${startCoords.join(
+                      ","
+                    )}&end=${destinationCoords.join(",")}`;
+
+                    // Continue with the existing code for fetching directions
+                    fetch(directionsUrl)
+                      .then((response) => response.json())
+                      .then((data) => {
+                        fetch(directionsUrl)
+                          .then((response) => response.json())
+                          .then((data) => {
+                            if (data.features && data.features.length > 0) {
+                              // Extract relevant information from the directions response
+                              const duration =
+                                data.features[0].properties.segments[0]
+                                  .duration;
+                              const distance =
+                                data.features[0].properties.segments[0]
+                                  .distance;
+
+                              // Display the information in an alert
+                              alert(
+                                `DIRECTIONS FROM ${startLocation.toUpperCase()} TO ${destination.toUpperCase()} :\nDURATION : ${(
+                                  duration / 3600
+                                ).toFixed(2)} HRS\nDISTANCE : ${(
+                                  distance / 1000
+                                ).toFixed(2)} KM`
+                              );
+                            } else {
+                              alert(
+                                `Unable to get directions from ${startLocation} to ${destination}. Please try again.`
+                              );
+                            }
+                          })
+                          .catch((error) => {
+                            console.error("Error fetching directions:", error);
+                            alert(
+                              "Error fetching directions. Please try again."
+                            );
+                          });
+                      })
+                      .catch((error) => {
+                        console.error("Error fetching directions:", error);
+                        alert("Error fetching directions. Please try again.");
+                      });
+                  })
+                  .catch((error) => {
+                    console.error(
+                      "Error fetching destination geocoding data:",
+                      error
+                    );
+                    alert(
+                      "Error fetching destination geocoding data. Please try again."
+                    );
+                  });
+              })
+              .catch((error) => {
+                console.error(
+                  "Error fetching starting location geocoding data:",
+                  error
+                );
+                alert(
+                  "Error fetching starting location geocoding data. Please try again."
+                );
+              });
+          } else if (
+            result.results[0][0].transcript
+              .toLowerCase()
               .includes("search wikipedia for")
           ) {
             const wiki = result.results[0][0].transcript
