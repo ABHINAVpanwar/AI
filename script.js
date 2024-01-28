@@ -4,7 +4,6 @@ window.addEventListener("load", function () {
 });
 
 button = document.getElementById("button");
-bgd = document.getElementById("background");
 output = document.getElementById("output");
 
 // Function for the typewriter effect
@@ -42,16 +41,14 @@ button.addEventListener("click", function () {
   let recognition = new SpeechRecognition();
 
   recognition.onstart = () => {
-    bgd.play();
+    typeWriter("SPEECH RECOGNITION STARTED", 50);
   };
 
   recognition.onspeechend = () => {
     recognition.stop();
-    bgd.pause();
   };
 
   recognition.onresult = (result) => {
-    bgd.pause();
     console.log(result.results[0][0].transcript.toUpperCase());
     if (result.results[0][0].transcript.toLowerCase().includes("hello")) {
       var greetings = [
