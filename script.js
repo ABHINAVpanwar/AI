@@ -41,7 +41,7 @@ button.addEventListener("click", function () {
   let recognition = new SpeechRecognition();
 
   recognition.onstart = () => {
-    typeWriter("SPEECH RECOGNITION STARTED", 50);
+    typeWriter("", 50);
   };
 
   recognition.onspeechend = () => {
