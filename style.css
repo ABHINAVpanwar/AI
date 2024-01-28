@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#preloader {
+  background-color: #000000;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#PL {
+  height: 150px;
+  width: 150px;
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+#button {
+  cursor: pointer;
+}
+
+#messagebox {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  height: 200px;
+  width: 400px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#output {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: #20c20e;
+  font-size: 16px;
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@media screen and (min-width: 1400px) {
+  #messagebox {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 300px;
+    width: 400px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #output {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #20c20e;
+    font-size: 22px;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 1400px) {
+  #messagebox {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 200px;
+    width: 400px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #output {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #20c20e;
+    font-size: 16px;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #messagebox {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 150px;
+    width: 300px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #output {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #20c20e;
+    font-size: 12px;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+}
