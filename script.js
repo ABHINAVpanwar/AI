@@ -253,6 +253,38 @@ button.addEventListener("click", function () {
           );
         });
     } else if (
+      result.results[0][0].transcript.toLowerCase().includes("meaning of")
+    ) {
+      const word = result.results[0][0].transcript
+        .toLowerCase()
+        .replace("meaning of", "")
+        .trim();
+
+      var apiKey = "fsrqvnWVJQwcyoIomsF7lA==tLDvpk1irPxBu8fi"; // Replace with your actual API key
+
+      fetch("https://api.api-ninjas.com/v1/dictionary?word=" + word, {
+        method: "GET",
+        headers: {
+          "X-Api-Key": apiKey,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          typeWriter(
+            `${data.definition.slice(0, data.definition.indexOf("3"))}`,
+            50
+          );
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else if (
       result.results[0][0].transcript
         .toLowerCase()
         .includes("search wikipedia for")
