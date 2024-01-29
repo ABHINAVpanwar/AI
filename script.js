@@ -1,7 +1,30 @@
-window.addEventListener("load", function () {
-  this.document.getElementById("preloader").style.display = "none";
-  this.document.getElementById("PL").style.display = "none";
+// Select the target node
+const target = document.body;
+
+// Create an observer instance
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+      // Check if added nodes include the target elements
+      const preloader = document.getElementById("preloader");
+      const PL = document.getElementById("PL");
+
+      if (preloader && PL) {
+        preloader.style.display = "none";
+        PL.style.display = "none";
+
+        // Disconnect the observer once elements are found
+        observer.disconnect();
+      }
+    }
+  });
 });
+
+// Configuration of the observer
+const config = { childList: true, subtree: true };
+
+// Start observing the target node for configured mutations
+observer.observe(target, config);
 
 button = document.getElementById("button");
 output = document.getElementById("output");
@@ -277,7 +300,10 @@ button.addEventListener("click", function () {
         })
         .then((data) => {
           typeWriter(
-            `${data.definition.slice(0, data.definition.indexOf("3"))}`,
+            `${word.toUpperCase()} - ${data.definition.slice(
+              0,
+              data.definition.indexOf("3")
+            )}`,
             50
           );
         })
@@ -311,6 +337,10 @@ button.addEventListener("click", function () {
               break;
             }
           }
+          typeWriter(
+            `THESE WERE TODAY'S TOP ${data.articles.length} HEADLINES STAY INFORMED!`,
+            50
+          );
         })
         .catch((error) => {
           console.error("Error:", error);
