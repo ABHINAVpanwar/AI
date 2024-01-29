@@ -287,42 +287,46 @@ button.addEventListener("click", function () {
         .catch((error) => {
           console.error("Error:", error);
         });
-    } else if (result.results[0][0].transcript.toLowerCase().includes("news")) {
-      // Replace 'YOUR_API_KEY' with your actual News API key
-      var apiKey = "024b649e788045f980852117fca7e78e";
+    }
 
-      // News API endpoint
-      var apiUrl = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}`;
+    // else if (result.results[0][0].transcript.toLowerCase().includes("news")) {
+    //   // Replace 'YOUR_API_KEY' with your actual News API key
+    //   var apiKey = "024b649e788045f980852117fca7e78e";
 
-      // Fetch options
-      var fetchOptions = {
-        method: "GET",
-      };
+    //   // News API endpoint
+    //   var apiUrl = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}`;
 
-      // Make the fetch request
-      fetch(apiUrl, fetchOptions)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          for (let i = 0; i < data.articles.length; i++) {
-            const articleTitle = data.articles[i].title;
-            if (!confirm(`${articleTitle}`)) {
-              break;
-            }
-          }
-          typeWriter(
-            `THESE WERE TODAY'S TOP ${data.articles.length} HEADLINES`,
-            50
-          );
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else if (
+    //   // Fetch options
+    //   var fetchOptions = {
+    //     method: "GET",
+    //   };
+
+    //   // Make the fetch request
+    //   fetch(apiUrl, fetchOptions)
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error(`HTTP error! Status: ${response.status}`);
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       for (let i = 0; i < data.articles.length; i++) {
+    //         const articleTitle = data.articles[i].title;
+    //         if (!confirm(`${articleTitle}`)) {
+    //           break;
+    //         }
+    //       }
+    //       typeWriter(
+    //         `THESE WERE TODAY'S TOP ${data.articles.length} HEADLINES`,
+    //         50
+    //       );
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error:", error);
+    //     });
+    // }
+    
+    else if (
       result.results[0][0].transcript
         .toLowerCase()
         .includes("search wikipedia for")
