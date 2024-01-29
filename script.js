@@ -324,12 +324,6 @@ button.addEventListener("click", function () {
 
       // Make the fetch request
       fetch(apiUrl, fetchOptions)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
         .then((data) => {
           for (let i = 0; i < data.articles.length; i++) {
             const articleTitle = data.articles[i].title;
