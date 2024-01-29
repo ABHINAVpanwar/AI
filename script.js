@@ -312,11 +312,10 @@ button.addEventListener("click", function () {
         });
     } else if (result.results[0][0].transcript.toLowerCase().includes("news")) {
       // Replace 'YOUR_API_KEY' with your actual News API key
-      // var apiKey = "024b649e788045f980852117fca7e78e";
+      var apiKey = "024b649e788045f980852117fca7e78e";
 
       // News API endpoint
-      var apiUrl = `
-      https://newsapi.org/v2/top-headlines?country=in&apiKey=024b649e788045f980852117fca7e78e`;
+      var apiUrl = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}`;
 
       // Fetch options
       var fetchOptions = {
