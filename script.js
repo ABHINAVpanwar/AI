@@ -1,30 +1,7 @@
-// Select the target node
-const target = document.body;
-
-// Create an observer instance
-const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-      // Check if added nodes include the target elements
-      const preloader = document.getElementById("preloader");
-      const PL = document.getElementById("PL");
-
-      if (preloader && PL) {
-        preloader.style.display = "none";
-        PL.style.display = "none";
-
-        // Disconnect the observer once elements are found
-        observer.disconnect();
-      }
-    }
-  });
+window.addEventListener("load", function () {
+  this.document.getElementById("preloader").style.display = "none";
+  this.document.getElementById("PL").style.display = "none";
 });
-
-// Configuration of the observer
-const config = { childList: true, subtree: true };
-
-// Start observing the target node for configured mutations
-observer.observe(target, config);
 
 button = document.getElementById("button");
 output = document.getElementById("output");
