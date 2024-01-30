@@ -323,14 +323,12 @@ button.addEventListener("click", function () {
               break;
             }
           }
-          console.log(data.results);
           typeWriter(`THESE WERE TOP ${data.results.length} LATEST MOVIES`, 50);
         })
         .catch((error) => {
           console.error("Error:", error);
         });
     }
-
     // else if (result.results[0][0].transcript.toLowerCase().includes("news")) {
     //   // Replace 'YOUR_API_KEY' with your actual News API key
     //   var apiKey = "024b649e788045f980852117fca7e78e";
