@@ -287,6 +287,48 @@ button.addEventListener("click", function () {
         .catch((error) => {
           console.error("Error:", error);
         });
+    } else if (
+      result.results[0][0].transcript.toLowerCase().includes("movie")
+    ) {
+      const apiKey = "a974b84a0e4c4ecf7867c911669b4c9a"; // Your TMDb API key
+      const apiReadToken =
+        "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOTc0Yjg0YTBlNGM0ZWNmNzg2N2M5MTE2NjliNGM5YSIsInN1YiI6IjY1Yjk0NjI0OTBmY2EzMDBjOTA1Nzc3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tXlwbp1kJvAeplLvj2P_RdO1FJ1jfTQBSVSiUunoOGg";
+
+      // URL for TMDb API endpoint (replace with the actual endpoint you want to use)
+      const apiUrl = "https://api.themoviedb.org/3/movie/popular";
+
+      // Fetching data from TMDb API using the provided JWT for read access
+      fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${apiReadToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          for (let i = 0; i < data.results.length; i++) {
+            const x = data.results[i].title;
+            const z = data.results[i].vote_average;
+            const y = data.results[i].release_date;
+
+            if (
+              !confirm(`${x.toUpperCase()}\nRELEASE DATE : ${y}\nRATING : ${z}`)
+            ) {
+              break;
+            }
+          }
+          console.log(data.results);
+          typeWriter(`THESE WERE TOP ${data.results.length} LATEST MOVIES`, 50);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
 
     // else if (result.results[0][0].transcript.toLowerCase().includes("news")) {
@@ -325,7 +367,6 @@ button.addEventListener("click", function () {
     //       console.error("Error:", error);
     //     });
     // }
-    
     else if (
       result.results[0][0].transcript
         .toLowerCase()
