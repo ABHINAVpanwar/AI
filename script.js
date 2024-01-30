@@ -83,7 +83,7 @@ button.addEventListener("click", function () {
       window.open("https://www.twitch.tv/", "_blank");
       typeWriter("OPENING TWITCH", 50);
     } else if (
-      result.results[0][0].transcript.toLowerCase() === "OPEN MY PORTFOLIO"
+      result.results[0][0].transcript.toLowerCase() === "open my portfolio"
     ) {
       window.open("https://abhinavpanwar.netlify.app/", "_blank");
       typeWriter("OPENING YOUR PORTFOLIO", 50);
