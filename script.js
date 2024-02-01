@@ -107,6 +107,39 @@ button.addEventListener("click", function () {
     ) {
       window.open("https://www.instagram.com/", "_blank");
       typeWriter("OPENING INSTAGRAM", 50);
+    } else if (
+      result.results[0][0].transcript.toLowerCase().includes("time in")
+    ) {
+      citytime = result.results[0][0].transcript.toLowerCase();
+      citytime = citytime.substring(citytime.indexOf("time in") + 7).trim();
+
+      const apiKey = "fsrqvnWVJQwcyoIomsF7lA==tLDvpk1irPxBu8fi";
+
+      fetch(`https://api.api-ninjas.com/v1/worldtime?city=${citytime}`, {
+        method: "GET",
+        headers: {
+          "X-Api-Key": apiKey,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          typeWriter(
+            `CURRENT DATE AND TIME IN ${citytime.toUpperCase()} IS ${
+              data.datetime
+            }`,
+            50
+          );
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } else if (result.results[0][0].transcript.toLowerCase().includes("time")) {
       const currentTime = new Date().toLocaleTimeString();
       typeWriter(`CURRENT TIME IS ${currentTime}`, 50);
@@ -342,7 +375,6 @@ button.addEventListener("click", function () {
 
       typeWriter(`${expression} = ${eval(expression)}`, 50);
     }
-
     // else if (result.results[0][0].transcript.toLowerCase().includes("news")) {
     //   // Replace 'YOUR_API_KEY' with your actual News API key
     //   var apiKey = "024b649e788045f980852117fca7e78e";
