@@ -108,6 +108,41 @@ button.addEventListener("click", function () {
       window.open("https://www.instagram.com/", "_blank");
       typeWriter("OPENING INSTAGRAM", 50);
     } else if (
+      result.results[0][0].transcript.toLowerCase().includes("timer of")
+    ) {
+      t = result.results[0][0].transcript.toLowerCase();
+      t = t.substring(t.indexOf("timer of") + 8).trim();
+      t = t.split(" ");
+
+      if (t[1] == "hour" || t[1] == "hours") {
+        displayCountdown(t[0] * 60 * 60 * 1000);
+      } else if (t[1] == "minute" || t[1] == "minutes") {
+        displayCountdown(t[0] * 60 * 1000);
+      } else if (t[1] == "second" || t[1] == "seconds") {
+        displayCountdown(t[0] * 1000);
+      }
+
+      function displayCountdown(remainingTime) {
+        // Function to update the countdown display
+        let intervalId = setInterval(function () {
+          let hours = Math.floor(
+            (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          let minutes = Math.floor(
+            (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+          output.textContent = `${hours} : ${minutes} : ${seconds}`;
+
+          if (remainingTime <= 0) {
+            clearInterval(intervalId);
+            typeWriter("TIME IS UP !", 50);
+          } else {
+            remainingTime -= 1000;
+          }
+        }, 1000);
+      }
+    } else if (
       result.results[0][0].transcript.toLowerCase().includes("time in")
     ) {
       citytime = result.results[0][0].transcript.toLowerCase();
@@ -132,7 +167,9 @@ button.addEventListener("click", function () {
           typeWriter(
             `CURRENT TIME IN ${citytime.toUpperCase()} IS ${data.hour}:${
               data.minute
-            }:${data.second} , ${data.day_of_week.substring(0, 3)}`,
+            }:${data.second} , ${data.day_of_week
+              .substring(0, 3)
+              .toUpperCase()}`,
             50
           );
         })
