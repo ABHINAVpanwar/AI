@@ -130,12 +130,11 @@ button.addEventListener("click", function () {
         })
         .then((data) => {
           typeWriter(
-            `CURRENT DATE AND TIME IN ${citytime.toUpperCase()} IS ${
-              data.datetime
-            }`,
+            `CURRENT TIME IN ${citytime.toUpperCase()} IS ${data.hour}:${
+              data.minute
+            }:${data.second} , ${data.day_of_week.substring(0, 3)}`,
             50
           );
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error:", error);
