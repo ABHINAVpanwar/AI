@@ -516,6 +516,19 @@ button.addEventListener("click", function () {
         "_blank"
       );
       typeWriter(`SEARCHING INSTAGRAM FOR ${insta.toUpperCase()}`, 50);
+    } else if (
+      result.results[0][0].transcript.toLowerCase().includes("server")
+    ) {
+      async function fetchData() {
+        try {
+          const response = await fetch("http://127.0.0.1:5000/data");
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", fetchData);
     } else {
       const google = result.results[0][0].transcript.toLowerCase();
       window.open(
