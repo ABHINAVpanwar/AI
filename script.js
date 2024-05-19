@@ -20,6 +20,17 @@ function typeWriter(text, speed) {
   type();
 }
 
+// Extracting data from server
+async function fetchData() {
+  try {
+    const response = await fetch("http://127.0.0.1:5000/data");
+    const data = await response.json();
+    typeWriter(`${data.toUpperCase()}`, 50);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const output = document.getElementById("output");
   // Execute the typeWriter function after 2 seconds
@@ -519,16 +530,7 @@ button.addEventListener("click", function () {
     } else if (
       result.results[0][0].transcript.toLowerCase().includes("server")
     ) {
-      async function fetchData() {
-        try {
-          const response = await fetch("http://127.0.0.1:5000/data");
-          const data = await response.json();
-          typeWriter(`${data.toUpperCase()}`, 50);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      }
-      document.addEventListener("DOMContentLoaded", fetchData);
+      fetchData(); // Call the fetchData function
     } else {
       const google = result.results[0][0].transcript.toLowerCase();
       window.open(
